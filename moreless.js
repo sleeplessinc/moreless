@@ -12,39 +12,34 @@
         return toArray( document.querySelectorAll( qs ) );
     };
 
-    window.onload = () => {
+    globalThis.moreless = function( sel ) {
 
         const less = function( el ) {
-
             const div = el.moreless_div;
-            div.style.opacity = "0";
             div.innerText = "▼ Read more";
-
-            //el.classList.add( "collapsed" );
+            div.style.background = "linear-gradient( rgba(255,255,255,0.1), rgba(255,255,255,0.9), rgba(255,255,255,1.0))";
             el.style.height = "8em";
             el.style.paddingBottom = "0em";
-
             el.collapsed = true;
-            setTimeout( () => { div.style.opacity = "1.0"; }, 200 );
         };
 
         const more = function( el ) {
             const div = el.moreless_div;
-            div.style.opacity = "0";
             div.innerText = "▲ Read less";
-
-            //el.classList.remove( "collapsed" );
+            div.style.background = "transparent";
             el.style.height = el.scrollHeight + "px";
-
+            el.style.paddingBottom = "1.5em";
             el.collapsed = false;
-            setTimeout( () => { div.style.opacity = "1.0"; }, 200 );
         };
 
-        const els = QS( ".moreLess" );
+        const els = QS( sel );
         els.forEach( el => {
+
+            let old_opacity = el.style.opacity;
+            el.style.opacity = 0;
             
             el.style.position = "relative";
-            el.style.transition = "all 0.25s ease-in-out";
+            el.style.transition = "height 0.25s ease-in-out";
             el.style.border = "dashed 1px lightgray";
             el.style.overflow = "hidden";
             el.style.paddingBottom = "2em";
@@ -52,7 +47,6 @@
 
             const div = document.createElement( "div" );
 
-            div.style.background = "linear-gradient( rgba(255,255,255,0.1), rgba(255,255,255,0.9), rgba(255,255,255,1.0))";
             div.style.padding = "2em 1em 0.5em 0";
             div.style.color = "teal";
             div.style.cursor = "pointer";
@@ -77,6 +71,9 @@
                 }
             }
 
+            el.style.opacity = old_opacity;
+
         } );
     };
+
 })();
