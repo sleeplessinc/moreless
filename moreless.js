@@ -12,11 +12,11 @@
         return toArray( document.querySelectorAll( qs ) );
     };
 
-    globalThis.moreless = function( sel ) {
+    globalThis.moreless = function( sel = ".moreless", prmpts = [ "▼", "▲" ], prmpt_color = "teal" ) {
 
         const less = function( el ) {
             const div = el.moreless_div;
-            div.innerText = "▼ Read more";
+            div.innerText = prmpts[ 0 ];
             div.style.background = "linear-gradient( rgba(255,255,255,0.1), rgba(255,255,255,0.9), rgba(255,255,255,1.0))";
             el.style.height = "8em";
             el.style.paddingBottom = "0em";
@@ -25,7 +25,7 @@
 
         const more = function( el ) {
             const div = el.moreless_div;
-            div.innerText = "▲ Read less";
+            div.innerText = prmpts[ 1 ];
             div.style.background = "transparent";
             el.style.height = el.scrollHeight + "px";
             el.style.paddingBottom = "1.5em";
@@ -48,7 +48,7 @@
             const div = document.createElement( "div" );
 
             div.style.padding = "2em 1em 0.5em 0";
-            div.style.color = "teal";
+            div.style.color = prmpt_color;
             div.style.cursor = "pointer";
             div.style.position = "absolute";
             div.style.width = "100%";
