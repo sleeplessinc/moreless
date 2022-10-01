@@ -23,51 +23,63 @@
         opts = Object.assign( {}, DEF_OPTS, opts );
 
         const less = function( el ) {
+            el.style.height = "8em";
+            el.collapsed = true;
             const div = el.moreless_div;
             div.innerText = opts.prompts[ 0 ];
-            div.style.background = opts.gradient; //"linear-gradient( rgba(255,255,255,0.1), rgba(255,255,255,0.9), rgba(255,255,255,1.0))";
-            el.style.height = "8em";
-            //el.style.paddingBottom = "0em";
-            el.collapsed = true;
+            div.style.background = opts.gradient;
+            //div.style.position = "relative";
+            setTimeout( () => {
+                div.style.bottom = ( el.scrollHeight - el.clientHeight ) + "px";
+            }, 260 );
         };
 
         const more = function( el ) {
+            el.style.height = el.orig_height; //el.orig_height+"px"; //el.scrollHeight + "px";
+            el.collapsed = false;
             const div = el.moreless_div;
             div.innerText = opts.prompts[ 1 ];
             div.style.background = "transparent";
-            el.style.height = el.scrollHeight + "px";
-            //el.style.paddingBottom = "0.0em";
-            el.collapsed = false;
+            //setTimeout( () => {
+                div.style.bottom = "0px"; //div.clientHeight + "px"; //div.orig_position; //"relative";
+            //}, 260 );
         };
 
         const els = QS( sel );
         els.forEach( el => {
 
-            let old_opacity = el.style.opacity;
-            el.style.opacity = 0;
-            
-            el.style.position = "relative";
+            //let old_opacity = el.style.opacity;
+            //el.style.opacity = 0;
+
+            //el.style.position = "relative";
             el.style.transition = "height 0.25s ease-in-out";
-            //el.style.border = "dashed 1px lightgray";
+//el.style.border = "dashed 2px #f00";
             el.style.overflow = "hidden";
-            //el.style.paddingBottom = "2em";
-            el.style.height = "default";
+            //el.style.height = "default";
 
             const div = document.createElement( "div" );
+            el.appendChild(div);
 
-            div.style.padding = "2em 1em 0.5em 0";
+            //div.orig_position = div.style.position;
+            //div.orig_background = div.style.background;
+
+            //div.style.transition = "bottom 1.30s ease-in-out";
+            div.style.padding = "1em 1em 0.5em 0";
             div.style.color = opts.prompt_color;
             div.style.cursor = "pointer";
-            div.style.position = "absolute";
-            div.style.width = "100%";
+            //div.style.position = "absolute";
+            div.style.position = "relative";
+            //div.style.width = "100%";
             div.style.bottom = "0";
-            div.style.right = "0";
-            //div.style.border = "dashed 1px #f0f";
+            //div.style.right = "0";
+//div.style.border = "dashed 2px #00f";
             div.style.textAlign = "right";
+            div.innerText = opts.prompts[ 0 ];  // must do this so heights are correct
 
             el.moreless_div = div;
 
-            el.appendChild(div);
+            el.orig_height = el.clientHeight + "px"; //el.style.height;
+            
 
             less( el );
 
@@ -79,7 +91,7 @@
                 }
             }
 
-            el.style.opacity = old_opacity;
+            //el.style.opacity = old_opacity;
 
         } );
     };
