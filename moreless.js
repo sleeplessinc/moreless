@@ -40,7 +40,7 @@
             
             el.style.position = "relative";
             el.style.transition = "height 0.25s ease-in-out";
-            el.style.border = "dashed 1px lightgray";
+            //el.style.border = "dashed 1px lightgray";
             el.style.overflow = "hidden";
             el.style.paddingBottom = "2em";
             el.style.height = "default";
@@ -54,7 +54,7 @@
             div.style.width = "100%";
             div.style.bottom = "0";
             div.style.right = "0";
-            div.style.border = "dashed 1px #f0f";
+            //div.style.border = "dashed 1px #f0f";
             div.style.textAlign = "right";
 
             el.moreless_div = div;
