@@ -22,7 +22,8 @@ Open test.html in a browser to see how it works.
 
 ## options
 
-Default options:
+The optional options argument must be an object that looks something like this (these 
+are the defaults if you don't provide one):
 
     {
         prompts: [ "▼", "▲" ],
@@ -30,6 +31,6 @@ Default options:
         gradient: "linear-gradient( #ffffff22, #ffffffdd, #ffffffff, #ffffffff )",
     }
 
-You can pass in an object that will override any of the defaults
+If you pass in an options object the values in it will override the defaults.
 
 
