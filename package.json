@@ -9,6 +9,5 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sleepless": "^5.4.0"
   }
 }
